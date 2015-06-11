@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+      <!--此文件是关于spring-web的容器，只存放和springweb相关的东西，-->
+      <!--在目前的spring中spring和spring-web 是可以统一存放的 最好分开-->
+      <!--Initializing Spring root WebApplicationContext-->
+      <!-- 添加注解驱动 -->
+      <mvc:annotation-driven/>
+      <context:annotation-config/>
+
+      <!-- 把标记了@Controller注解的类转换为bean -->
+      <context:component-scan base-package="com.bee.admin.controller"/>
+
+      <!--静态资源过滤-->
+      <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+
+      <!--<mvc:interceptors>如果放在此处 则会导致无限循环 故将其放在spring文件中 正确-->
+
+
+      <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="prefix" value="/WEB-INF/jsp/"/>
+            <property name="suffix" value=".jsp"/>
+      </bean>
+
+
+
+
+      <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+            <!-- 设置允许上传文件最大大小，单位byte -->
+            <property name="maxUploadSize" value="5242880"/>
+            <!-- 设置默认编码 -->
+            <property name="defaultEncoding" value="UTF-8"/>
+      </bean>
+
+
+      <mvc:interceptors>
+                  <bean class="com.bee.admin.web.filter.AuthorizationInterceptor">
+                        <property name="ignorePrefixUrl">
+                              <list>
+                                    <value>/api</value>
+                                    <value>/resources</value>
+                                    <value>/upload</value>
+                              </list>
+                        </property>
+                        <property name="ignoreFullUri">
+                              <list>
+                                    <value>/</value>
+                                    <value>/admin/login</value>
+                                    <value>/admin/login.html</value>
+                                    <value>/admin/logout</value>
+                                    <value>/admin/logout.html</value>
+                              </list>
+                        </property>
+                  </bean>
+
+      </mvc:interceptors>
+
+      <!-- 异常处理 -->
+      <bean id="exceptionHandler" class="com.bee.admin.exception.mvc.AuthmanageExceptionHandler"/>
+
+
+</beans>

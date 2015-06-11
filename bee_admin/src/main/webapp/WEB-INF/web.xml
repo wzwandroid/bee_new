@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID" version="2.5" metadata-complete="true"  >
+
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--配置SpringMVC start 注意：如果此处 这样配置 ：
+    <servlet>
+        <servlet-name>api-demo-admin</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    那么web-inf 下必须要有一个api-demo-admin-servlet.xml 否则报错：
+    Caused by:
+java.io.FileNotFoundException: Could not open ServletContext resource [/WEB-INF/api-demo-admin-servlet.xml]-->
+
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+
+    <!--看上面 但是如果不用spring-web容器的话 在每一个controller中的初始化先于初始化的bean 可以存放session 所以还是用spring-web容器靠谱点-->
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+        <!--<url-pattern>/*</url-pattern> 此处不能为/* 否则controller中路径不对-->
+    </servlet-mapping>
+    <!-- 配置Spring的监听器和参数-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:applicationContext.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/log4j.properties</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    <!-- 载入Spring ApplicationContex t -->
+        <listener>
+            <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        </listener>
+        <!-- 载入Spring ApplicationContex t -->
+
+         <!--支持session scope的Spring bean-->
+        <!--<listener>-->
+            <!--<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>-->
+        <!--</listener>-->
+         <!--支持session scope的Spring bean-->
+
+    <!-- 配置请求参数过滤器 starts-->
+
+
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>-->
+    <!--</listener>-->
+
+
+    <!--配置SpringMVC end-->
+    <!--1‘’‘’执行顺序 ：过滤前 - 拦截前 - Action处理 - 拦截后 - 过滤后。-->
+    <!--2‘’‘个人认为过滤是一个横向的过程，首先把客户端提交的内容进行过滤(例如未登录用户不能访问内部页面的处理)；http://blog.csdn.net/lzwjavaphp/article/details/13771109-->
+    <!--3’‘’过滤通过后，拦截器将检查用户提交数据的验证，做一些前期的数据处理，接着把处理后的数据发给对应的Action；-->
+    <!--4‘’‘Action处理完成返回后，拦截器还可以做其他过程，再向上返回到过滤器的后续操作。这是最后添加的  估计拦截器和过滤器搞反了 -->
+<!-- 自定义过滤器 可获得分页的参数 pageSize pageNo,不必每次作为参数传递-->
+    <filter>
+        <filter-name>systemContextFilter</filter-name>
+        <filter-class>com.bee.admin.web.filter.SystemContextFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>systemContextFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 配置请求参数过滤器 ends-->
+    
+
+    <!--配置统一登录接口 -->
+    <!--<servlet>-->
+        <!--<servlet-name>loginInitServlet</servlet-name>-->
+        <!--<servlet-class>com.jiankangjin.authmanage.login.LoginInitServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>appToken</param-name>-->
+            <!--<param-value>7q1RNa1pNQyfsta2cfCQnerdidnS5FG19zV3yrviBTPvFKsa3EMvKbwyJuxzY3TpXgvCvaZJUUwTNUG8VaimcyFCjdU4N</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>appClientLoginHandler</param-name>-->
+            <!--<param-value>com.jiankangjin.trading.web.AppClientLoginHandlerImpl</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>forwardUrl</param-name>-->
+            <!--<param-value>/admin/index</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>loginUrl</param-name>-->
+            <!--<param-value>http://192.168.4.250/authmanage/api/user/login</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>allRespMsgUrl</param-name>-->
+            <!--<param-value>http://192.168.4.250/authmanage/api/respMsg/getAll</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>loginInitServlet</servlet-name>-->
+        <!--<url-pattern>/initLogin/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>/resources/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
+    <!--<servlet>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DruidStatView</servlet-name>-->
+        <!--<url-pattern>/druid/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+
+    <listener>
+        <listener-class>com.bee.admin.web.listener.InitDataListener</listener-class>
+    </listener>
+</web-app>

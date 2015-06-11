@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+    <!-- 打开Spring的Annotation支持 -->
+    <context:annotation-config />
+    <!-- 设定Spring 去哪些包中找Annotation -->
+    <context:component-scan base-package="com.bee.admin.service" />
+    <context:component-scan base-package="com.bee.admin.service.impl" />
+    <context:component-scan base-package="com.bee.dba.dao" />
+
+    <bean
+            class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+    <bean
+            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <util:list id="beanList">
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </util:list>
+        </property>
+    </bean>
+
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置 数据源-->
+    <import resource="classpath:applicationContext-dao-core.xml" />
+    <!-- spring 声明式事务 - ->-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource_db_bee_dba" />
+    </bean>
+    <!--spring 事务属性 -->
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--&lt;!&ndash; 让所有的方法都加入事务管理，为了提高效率，可以把一些查询之类的方法设置为只读的事务 &ndash;&gt;-->
+            <tx:method name="*" propagation="REQUIRED" read-only="true" />
+            <!-- 以下方法都是可能设计修改的方法，就无法设置为只读 -->
+            <tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+            <tx:method name="clear*" propagation="REQUIRED" rollback-for="java.lang.RuntimeException"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置AOP，Spring是通过AOP来进行事务管理的 -->
+    <aop:config>
+        <!-- 设置pointCut表示哪些方法要加入事务处理 -->
+        <!-- 以下的事务是声明在DAO中，但是通常都会在Service来处理多个业务对象逻辑的关系，注入删除，更新等，此时如果在执行了一个步骤之后抛出异常
+            就会导致数据不完整，所以事务不应该在DAO层处理，而应该在service，这也就是Spring所提供的一个非常方便的工具，声明式事务 -->
+        <aop:pointcut id="allMethods"
+                      expression="execution(* com.bee.admin.service.impl.*.*(..))" />
+        <!-- 通过advisor来确定具体要加入事务控制的方法 -->
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="allMethods" />
+    </aop:config>
+
+    <bean class="com.bee.admin.web.servlet.InitServlet"/>
+</beans>

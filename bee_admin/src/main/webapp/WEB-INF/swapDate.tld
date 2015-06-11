@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description>apiDemo自定义EL函数</description>
+    <display-name>JSTL functions</display-name>
+    <tlib-version>1.1</tlib-version>
+
+    <!--这里的所谓“简称”，可以随便写-->
+    <short-name>swap</short-name>
+    <!--这里的uri，可以随便写-->
+    <uri>http:/com.bee.com/jstl/swap</uri>
+
+    <!--<function>-->
+        <!--&lt;!&ndash;这里name可以随便写&ndash;&gt;-->
+        <!--<name>swapDatePattern</name>-->
+        <!--&lt;!&ndash;这里最为重要，指定类所在位置，以及类方法的一些重要信息&ndash;&gt;-->
+        <!--<function-class>com.demo.admin.web.tags.jstl.JKJ_Custom_Func</function-class>-->
+        <!--<function-signature>java.lang.String swapDatePattern(java.lang.String,java.lang.String,java.lang.String)</function-signature>-->
+    <!--</function>-->
+
+    <!--<function>-->
+        <!--<description>将Java对象转为json字符串</description>-->
+        <!--<name>toJSON</name>-->
+        <!--<function-class>com.demo.admin.web.tags.jstl.JKJ_Custom_Func</function-class>-->
+        <!--<function-signature>java.lang.String toJSON(java.lang.Object)</function-signature>-->
+    <!--</function>-->
+
+
+</taglib>
