@@ -36,7 +36,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="bee_dba" />
-    <orderEntry type="library" name="Maven: bee_pagination:bee_pagination:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="bee_pagination" />
     <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp:jsp-api:2.2" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />

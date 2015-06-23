@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <!-- Title and other stuffs -->
-    <title>登陆页面-健康金交易查询管理系统</title>
+    <title>小蜜蜂后台管理系统</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
                 <!-- Widget starts -->
                 <div class="widget worange">
                     <!-- Widget head -->
-                    <div class="widget-head"><i class="icon-lock"></i> 健康金交易查询管理系统 - 登陆页面</div>
+                    <div class="widget-head"><i class="icon-lock"></i> 小蜜蜂后台管理系统 - 登陆页面</div>
                     <div class="widget-content">
                         <div class="padd">
                             <!-- Login form -->
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-md-7 col-md-offset-3">
                                     <button type="button" class="btn btn-primary" id="btnLogin" data-loading-text="正在登录,请稍候..." autocomplete="off">登陆</button>
-                                    <button type="reset" class="btn btn-inverse" id="btnForgetPwd">忘记密码</button>
+                                    <%--<button type="reset" class="btn btn-inverse" id="btnForgetPwd">忘记密码</button>--%>
                                 </div>
                                 <br/>
                             </form>

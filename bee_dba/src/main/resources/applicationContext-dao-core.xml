@@ -42,7 +42,7 @@
     <bean id="pagination" class="com.bee.mybatis.v3_2.PaginationInterceptorEnhance">
         <property name="properties">
             <props>
-                <prop key="dialect">oracle</prop>
+                <prop key="dialect">mysql</prop>
                 <prop key="pageSqlId">.*page.*</prop>
             </props>
         </property>
@@ -62,6 +62,30 @@
     <bean id="beeUserDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="sqlSessionFactory" ref="sqlSessionFactory_db_bee_dba"/>
         <property name="mapperInterface" value="com.bee.dba.dao.IBeeUserDao"/>
+    </bean>
+    <bean id="beeRoleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory_db_bee_dba"/>
+        <property name="mapperInterface" value="com.bee.dba.dao.IBeeRoleDao"/>
+    </bean>
+    <bean id="beeMenuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory_db_bee_dba"/>
+        <property name="mapperInterface" value="com.bee.dba.dao.IBeeMenuDao"/>
+    </bean>
+    <bean id="beeUserRoleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory_db_bee_dba"/>
+        <property name="mapperInterface" value="com.bee.dba.dao.IBeeUserRoleDao"/>
+    </bean>
+    <bean id="beeRightDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory_db_bee_dba"/>
+        <property name="mapperInterface" value="com.bee.dba.dao.IBeeRightDao"/>
+    </bean>
+    <bean id="beeServiceAreaDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory_db_bee_dba"/>
+        <property name="mapperInterface" value="com.bee.dba.dao.IBeeServiceAreaDao"/>
+    </bean>
+    <bean id="beeProductDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory_db_bee_dba"/>
+        <property name="mapperInterface" value="com.bee.dba.dao.IBeeProductDao"/>
     </bean>
 
     <!--<bean id="beeRoleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">-->

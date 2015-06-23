@@ -7,8 +7,9 @@
         <groupId>bee</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>bee_pagination</groupId>
     <artifactId>bee_pagination</artifactId>
 
     <build>
@@ -17,6 +18,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
             </plugin>
         </plugins>
     </build>

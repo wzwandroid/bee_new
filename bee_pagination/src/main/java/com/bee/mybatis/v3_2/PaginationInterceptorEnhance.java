@@ -1,5 +1,6 @@
 package com.bee.mybatis.v3_2;
 
+
 import com.bee.mybatis.Pager;
 import com.bee.mybatis.util.ReflectHelper;
 import org.apache.ibatis.executor.ErrorContext;
@@ -79,7 +80,7 @@ public class PaginationInterceptorEnhance implements Interceptor {
 					String pageSql = generatePageSql(sql,pager);
 					ReflectHelper.setValueByFieldName(boundSql, "sql", pageSql);
 					if(pager.isAutoCount()) {
-						String countSql = "select count(*) from (" + sql + ")";
+						String countSql = "select count(*) from (" + sql + ") as cltb";
 						PreparedStatement countStmt = connection.prepareStatement(countSql);
 						
 						BoundSql countBS = new BoundSql(mappedStatement.getConfiguration(), countSql, boundSql.getParameterMappings(), parameterObject);

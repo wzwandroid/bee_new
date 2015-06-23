@@ -63,8 +63,8 @@ var MZ = {
         if (!data)return[];
         if (!options.pIdKey)return data;
         var idKey, name, pIdKey,children;
-        idKey = options.idKey || 'id';
-        name = options.name || 'name';
+        idKey = options.idKey || 'code';
+        name = options.name || 'parentCode';
         pIdKey = options.pIdKey;
         children = options.children || 'children';
         var i, l, treeData = [], tmpMap = [];

@@ -14,7 +14,7 @@
             success: function (result) {
                 var json = MZ.jsonEval(result);
                 var lis = "";
-                var options = {idKey: 'id', name: 'name', pIdKey: 'parentId'};
+                var options = {idKey: 'code', name: 'menuName', pIdKey: 'parentCode'};
                 var tdata = MZ.parseSimpleData(options, result.data);
                 var lis = _geneateTrees(tdata);
                 $(lis).appendTo($('#nav')).find('a').on('click', _initLiEnv);
@@ -90,7 +90,7 @@
         var uls = '';
         for(var i= 0,len =data.length;i<len;i++) {
             var item = data[i];
-            var li = '<li class=""><a href="#"><i class="icon-list-alt"></i>' + item.name +
+            var li = '<li class=""><a href="#"><i class="icon-list-alt"></i>' + item.menuName +
                 '<span class="pull-right"><i class="icon-chevron-right"></i></span></a><ul>';
             if(item.children && item.children.length > 0){
                 for(var j= 0,jlen = item.children.length;j<jlen;j++) {
@@ -100,7 +100,7 @@
                         window.location.href = basepath + "/login";
                         return;
                     }
-                    li += '<li><a target="tab" href="' + (basepath + jItem.href) + '">' + jItem.name + '</a></li>';
+                    li += '<li><a target="tab" href="' + (basepath + jItem.menuUrl) + '">' + jItem.menuName + '</a></li>';
                 }
             }
             li += "</ul></li>";

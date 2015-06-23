@@ -1,18 +1,11 @@
 package com.bee.admin.web.servlet;
 
 
-
-import com.bee.admin.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 容器启动完成后的一些初始化操作
@@ -37,7 +30,7 @@ public class InitServlet implements ApplicationListener<ContextRefreshedEvent> {
         }
 
 //        if (contextRefreshedEvent.getApplicationContext().getParent() == null) {
-//            logger.info("**************InstantiationSysParamsTracingBeanPostProcessor.onApplicationEvent executing********************");
+//            logger.info("**************InstantiationBeeDataDictionary.onApplicationEvent executing********************");
 //            //获取bean对象
 //            ISysGroupConfService sysGroupConfService = wac.getBean(ISysGroupConfService.class);
 //            ISysParamsConfService sysParamsConfService = wac.getBean(ISysParamsConfService.class);
@@ -46,7 +39,7 @@ public class InitServlet implements ApplicationListener<ContextRefreshedEvent> {
 //            List<SysParamsConfEntity> sysParamsConfEntityList = sysParamsConfService.listAll();
 //            generateSysParams(sysGroupConfEntityList, sysParamsConfEntityList);
 //            logger.info("数据字典初始化成功");
-//            logger.info("**************InstantiationSysParamsTracingBeanPostProcessor.onApplicationEvent finished********************");
+//            logger.info("**************InstantiationInstantiationBeeDataDictionaryTracingBeanPostProcessor.onApplicationEvent finished********************");
 //        }
     }
 

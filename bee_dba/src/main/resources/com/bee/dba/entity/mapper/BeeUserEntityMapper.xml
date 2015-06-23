@@ -15,8 +15,8 @@
 		<result column="score" property="score" jdbcType="VARCHAR"/>
 		<result column="photo" property="photo" jdbcType="VARCHAR"/>
 		<result column="operatorId" property="operatorId" jdbcType="VARCHAR"/>
-		<result column="createTime" property="createTime" jdbcType="DATE"/>
-		<result column="updateTime" property="updateTime" jdbcType="DATE"/>
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -34,7 +34,7 @@
 			AND bu.userId = #{userId,jdbcType=VARCHAR}
 		</if>
 		<if test="userName != null">
-			AND bu.userName LIKE  '%'|| #{userName,jdbcType=VARCHAR}||'%'
+			AND bu.userName  = #{userName,jdbcType=VARCHAR}
 		</if>
 		<if test="password != null">
 			AND bu.password = #{password,jdbcType=VARCHAR}
@@ -91,7 +91,7 @@
 			<include refid="Where_Column_List"/>
 		</where>
 	</select>
-	<select id="listAll" resultMap="BaseResultMap">
+	<select id="listAll"   resultMap="BaseResultMap">
 		SELECT
 		<include refid="Base_Column_List"/>
 		FROM  bee_user bu

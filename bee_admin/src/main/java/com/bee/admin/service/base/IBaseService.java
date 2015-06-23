@@ -21,6 +21,13 @@ public interface IBaseService<E,PK extends Serializable> {
     int deleteByPks(List<PK> pks);
 
     /**
+     *逻辑删除
+     *
+     */
+    int deleteLogicByPrimaryKeys(Map<String, Object> params);
+
+
+    /**
      * 添加对象，空属性不会插入
      * @param entity pojo对象
      */

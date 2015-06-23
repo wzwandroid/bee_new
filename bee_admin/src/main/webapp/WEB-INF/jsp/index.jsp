@@ -103,9 +103,9 @@
         <li style="background-color: #fff"><a href="${pageContext.request.contextPath}/admin/index" class="open" mz-index="true">
             <i class="icon-home"></i> 首页</a>
         </li>
-        <li style="background-color: #fff"><a href="${pageContext.request.contextPath}/api" class="open" mz-index="true">
-            <i class="icon-home"></i> 接口管理测试</a>
-        </li>
+        <%--<li style="background-color: #fff"><a href="${pageContext.request.contextPath}/api" class="open" mz-index="true">--%>
+            <%--<i class="icon-home"></i> 接口管理测试</a>--%>
+        <%--</li>--%>
         <%--<li class=""><a href="#"><i class="icon-file-text"></i>功能测试<span class="pull-right"><i--%>
                 <%--class="icon-chevron-right"></i></span></a>--%>
             <%--<ul>--%>
@@ -416,6 +416,7 @@
 <script src="${pageContext.request.contextPath}/resources/mz/js/mz.index.js"></script>
 <script src="${pageContext.request.contextPath}/resources/mz/js/mz.validate.method.js"></script>
 <script src="${pageContext.request.contextPath}/resources/mz/js/mz.messages.zh.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/mz/js/modifyPassword.js"></script>
+<script src="${pageContext.request.contextPath}/resources/mz/js/common.js"></script>
 </body>
 </html>

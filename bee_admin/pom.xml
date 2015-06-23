@@ -7,6 +7,7 @@
         <groupId>bee</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
     <groupId>bee_admin</groupId>
     <artifactId>bee_admin</artifactId>

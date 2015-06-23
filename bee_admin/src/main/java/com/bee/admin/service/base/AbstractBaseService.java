@@ -38,6 +38,14 @@ public abstract class AbstractBaseService<E, PK extends Serializable> implements
     }
 
     /**
+     *逻辑删除
+     *
+     */
+    public int deleteLogicByPrimaryKeys(Map<String, Object> params){
+        return this.getBaseDao().deleteLogicByPrimaryKeys(params);
+    }
+
+    /**
      * 添加对象，空属性不会插入
      *
      * @param entity pojo对象

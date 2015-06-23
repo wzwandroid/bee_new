@@ -26,6 +26,12 @@ public interface IBaseDao<E, PK extends Serializable> {
     int deleteByPrimaryKeys(List<PK> pks);
 
     /**
+     *逻辑删除
+     *
+     */
+    int deleteLogicByPrimaryKeys(Map<String, Object> params);
+
+    /**
      * 添加对象，空属性不会插入
      *
      * @param entity pojo对象

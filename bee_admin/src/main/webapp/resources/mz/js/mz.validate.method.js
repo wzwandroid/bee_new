@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2014/9/3.
+ * Created by mark on 2015/9/3.
  */
 (function($){
     if ($.validator) {

@@ -3,7 +3,6 @@
 package com.bee.admin.utils;
 
 
-
 import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
@@ -11,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by jiankangjin on 2014/5/12.
+ *
  */
 public abstract class DateUtils {
 //    private static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
@@ -48,8 +47,6 @@ public abstract class DateUtils {
         if ((date == null) || !StringUtils.hasLength(pattern)) {
             return null;
         }
-
-
         return ThreadSafeDateParse.format(date, pattern);
     }
 

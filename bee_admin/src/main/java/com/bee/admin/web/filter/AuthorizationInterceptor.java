@@ -1,7 +1,9 @@
 package com.bee.admin.web.filter;
 
+import com.bee.admin.constants.SystemConstant;
 import com.bee.admin.utils.CollectionUtils;
 //import com.bee.dba.entity.TUserEntity;
+import com.bee.dba.entity.BeeUserEntity;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,12 +57,12 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
 
         HttpSession session = request.getSession();
-//        TUserEntity tUserEntity= (TUserEntity) session.getAttribute(SystemConstant.LOGIN_USER_INFO.getCode());
-//        if (tUserEntity == null) {
-//            response.setContentType("text/html;charset=UTF-8");
-//            response.getWriter().write("<script>alert(\"您已经很久没有操作页面，请重新登陆在操作。\");window.location.href='" + contextPath + "/admin/login';</script>");
-//            return false;
-//        }
+        BeeUserEntity beeUserEntity = (BeeUserEntity) session.getAttribute(SystemConstant.LOGIN_USER_INFO.getCode());
+        if (beeUserEntity == null) {
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write("<script>alert(\"您没有登录或访问时间超时，请重新登录。\");window.location.href='" + contextPath + "/admin/login';</script>");
+            return false;
+        }
         return true;
 
 
